@@ -21,3 +21,15 @@ Airport::Airport(int id, string name, string city, string country,
   longitude_ = longtitude;
   timezone_ = tmz;
 }
+
+int Airport::getId() {
+  return id_;
+}
+
+double Airport::getLatitude() {
+  return latitude_; 
+}
+
+double Airport::getLongitude() {
+  return longitude_; 
+}

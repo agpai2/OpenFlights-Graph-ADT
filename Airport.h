@@ -18,6 +18,15 @@ class Airport {
     Airport(int id, string name, string city, string country, 
     double lat, double longtitude, double tmz);
 
+    // Gets the id of the airport
+    int getId();
+
+    // Gets the latitude 
+    double getLatitude();
+    
+    // Gets the longitude
+    double getLongitude();
+
   private:
     // Unique OpenFlights identifier for this airport
     int id_;
