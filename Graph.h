@@ -3,6 +3,8 @@
 
 class Graph {
     public:
+    
+        Graph();
         /**
          * Inserts an edge between two vertices (Airports).
          * 

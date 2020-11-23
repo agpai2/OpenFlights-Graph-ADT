@@ -1,5 +1,5 @@
 EXENAME = finalproj
-OBJS = readFromFile.o main.o
+OBJS = readFromFile.o main.o Graph.o Airport.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -30,8 +30,14 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-readFromFile.o: main.cpp readFromFile.cpp
+readFromFile.o: main.cpp readFromFile.cpp readFromFile.hpp
 	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
+	
+Graph.o: Graph.cpp Graph.h
+	$(CXX) $(CXXFLAGS) Graph.cpp
+
+Airport.o: Airport.cpp Airport.h
+	$(CXX) $(CXXFLAGS) Airport.cpp
 
 test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp
 	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp $(LDFLAGS) -o test

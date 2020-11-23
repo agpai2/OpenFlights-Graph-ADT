@@ -1,8 +1,11 @@
 #include <iostream>
 #include <vector>
+
+#include "Graph.h"
 #include "readFromFile.hpp"
 
 int main(int argc, const char * argv[]) {
+	Graph g;
 	std::cout << "Filename: " << argv[1] << std::endl;
     //std::cout << "Filename: " << std::endl;
 	
