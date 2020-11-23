@@ -33,3 +33,8 @@ double Airport::getLatitude() {
 double Airport::getLongitude() {
   return longitude_; 
 }
+
+
+string Airport::getName() {
+  return name_;
+}
