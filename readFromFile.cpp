@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <algorithm>
+
+using namespace std;
 
 
 std::string file_to_string(const std::string & filename) {
@@ -31,4 +34,29 @@ std::vector<std::string> file_to_vector(const std::string & filename) {
 	}
 
 	return out;
-} 
+}
+
+std::vector<std::string> read_csv(const std::string &filename) {
+	std::ifstream file(filename);
+
+	if (!file.is_open())
+		throw std::runtime_error("Could not open file");
+
+	std::string line, attribute;
+	std::vector<std::string> result;
+
+	if (file.good()) {
+		while (std::getline(file, line)) {
+
+			std::stringstream ss(line);
+
+			// Extract each column name
+			while (std::getline(ss, attribute, ',')) {
+				attribute.erase(std::remove(attribute.begin(), attribute.end(), '\"'), attribute.end());
+				result.push_back(attribute);
+			}
+		}
+	}
+
+	return result;
+}
