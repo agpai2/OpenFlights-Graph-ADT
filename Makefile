@@ -1,4 +1,4 @@
-EXENAME = finalproj
+EXENAME = main
 OBJS = readFromFile.o main.o Graph.o Airport.o
 
 CXX = clang++
@@ -30,8 +30,11 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-readFromFile.o: main.cpp readFromFile.cpp readFromFile.hpp
-	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
+main.o : main.cpp
+	$(CXX) $(CXXFLAGS) main.cpp 
+
+readFromFile.o: readFromFile.cpp readFromFile.hpp
+	$(CXX) $(CXXFLAGS) readFromFile.cpp
 	
 Graph.o: Graph.cpp Graph.h
 	$(CXX) $(CXXFLAGS) Graph.cpp

@@ -2,13 +2,16 @@
 #include <cmath>
 
 Graph::Graph() {
-    adjMatrix.resize(INT32_MAX);
+    //Maybe not required
+    //Change it to variable read
+    adjMatrix.resize(15000);
 }
 
 
 void Graph::addEdge(Airport source, Airport destination) {
     double euclideanDist = euclideanDistance(source, destination);
     adjMatrix[source.getId() - 1][destination.getId() - 1] = euclideanDist;
+    adjMatrix[destination.getId() - 1][source.getId() - 1] = euclideanDist;
 }
 
 
