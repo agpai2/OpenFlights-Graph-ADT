@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 // adapted from CS 225 Final Project AMA
 
@@ -20,8 +21,8 @@ std::string file_to_string(const std::string & filename);
 std::vector<std::string> file_to_vector(const std::string & filename);
 
 /** 
- * Reads a csv file into a vector
+ * Reads a csv file into a map
  * @param filename The file to read from
- * @return a vector containing filename's contents
+ * @return a map containing filename's contents
  */
-std::vector<std::string> read_csv(const std::string &filename);
+std::map<int, std::vector<std::string>> csv_reader(const std::string &filename);

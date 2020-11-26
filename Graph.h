@@ -1,13 +1,13 @@
 #pragma once
 #include "Airport.h"
 #include "Route.h"
-
+#include <map>
 class Graph {
     public:
     
         Graph();
 
-        Graph(std::vector<std::string> airportVec, std::vector<std::string> routeVec);
+        Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, std::vector<std::string>> routeMap);
         /**
          * Inserts an edge between two vertices (Airports).
          * 

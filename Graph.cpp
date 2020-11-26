@@ -2,53 +2,46 @@
 #include <cmath>
 #include <map>
 #include <iostream>
+#include <vector>
 
 Graph::Graph() {
-    //Maybe not required
-    //Change it to variable read
-    adjMatrix.resize(15000);
+   adjMatrix.resize(100, std::vector<double>(100, 0));
 }
 
-Graph::Graph(std::vector<std::string> airportVec, std::vector<std::string> routeVec) {
-    adjMatrix.resize(15000);
-    for (int i = 0; i < 15000; i++) {
-        for (int j = 0; j < 15000; j++) {
-            adjMatrix[i].push_back(0);
-        }
-    }
+Graph::Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, std::vector<std::string>> routeMap) {
 
-    std::map<std::string, Airport> airportMap;
-    for (int i = 0; i < 2818; i++) {
+    adjMatrix.resize(airportMap[0].size(), std::vector<double>(airportMap[0].size(), 0));
+
+    std::map<std::string, Airport> airportCodeMap;
+    for (int i = 0; i < airportMap[0].size(); i++) {
         
-        Airport airportTemp(i + 1, airportVec[i*14 + 1], airportVec[i*14 + 2],
-                                airportVec[i*14 + 4], airportVec[i*14 + 5], std::stod(airportVec[i*14 + 6]), std::stod(airportVec[i*14 + 7]));
+        Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
+                                airportMap[4][i], airportMap[5][i], std::stod(airportMap[6][i]), std::stod(airportMap[7][i]));
         
-        airportMap[airportVec[i*14 + 4]] = airportTemp;
+        airportCodeMap[airportMap[4][i]] = airportTemp;
     }
     
-    for (int i = 0; i*9 + 4 < routeVec.size(); i++) {
-        addEdge(airportMap[routeVec[i*9 + 2]], airportMap[routeVec[i*9 + 4]]);
+    for (int i = 0; i < routeMap[0].size(); i++) {
+        if (airportCodeMap.count(routeMap[2][i]) != 0 && airportCodeMap.count(routeMap[4][i]))
+            addEdge(airportCodeMap[routeMap[2][i]], airportCodeMap[routeMap[4][i]]);
     }
+
 }
 
 void Graph::addEdge(Airport source, Airport destination) {
     double euclideanDist = euclideanDistance(source, destination);
-    adjMatrix[0][0] = 42;
-    std::cout << source.getId() << " " << destination.getId() << " " << std:: endl;
-    //adjMatrix[source.getId() - 1][destination.getId() - 1] = euclideanDist;
-    //adjMatrix[destination.getId() - 1][source.getId() - 1] = euclideanDist;
+    adjMatrix[source.getId() - 1][destination.getId() - 1] = euclideanDist;
 }
 
 
 bool Graph::areAdjacent(Airport source, Airport destination) {
     return adjMatrix[source.getId() - 1][destination.getId() - 1] != 0.0;
-
 }
 
 void Graph::displayMatrix(int v) {
    int i, j;
-   for(i = 0; i < 5; i++) {
-      for(j = 0; j < 5; j++) {
+   for(i = 0; i < v; i++) {
+      for(j = 0; j < v; j++) {
         std::cout << adjMatrix[i][j] << " ";
       }
       std::cout << std::endl;
