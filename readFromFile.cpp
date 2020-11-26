@@ -49,10 +49,20 @@ std::vector<std::string> read_csv(const std::string &filename) {
 		while (std::getline(file, line)) {
 
 			std::stringstream ss(line);
-
 			// Extract each column name
 			while (std::getline(ss, attribute, ',')) {
-				attribute.erase(std::remove(attribute.begin(), attribute.end(), '\"'), attribute.end());
+				// attribute.erase(std::remove(attribute.begin(), attribute.end(), '\"'), attribute.end());
+				if (attribute.empty()) {
+					result.push_back(attribute);
+					continue;
+				}
+				if (attribute[0] == '"' && attribute[attribute.size() - 1] != '"') {
+					std::string stringTemp = (attribute + ",");
+					std::getline(ss, attribute, ',');
+					stringTemp += attribute;
+					result.push_back(stringTemp);
+					continue;
+				}
 				result.push_back(attribute);
 			}
 		}

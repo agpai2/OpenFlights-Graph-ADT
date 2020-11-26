@@ -2,7 +2,10 @@
     "files.associations": {
         "iostream": "cpp",
         "vector": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "algorithm": "cpp",
+        "map": "cpp",
+        "xtree": "cpp"
     },
     "compile-hero.disable-compile-files-on-did-save-code": false
 }

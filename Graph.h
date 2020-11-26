@@ -1,10 +1,13 @@
 #pragma once
 #include "Airport.h"
+#include "Route.h"
 
 class Graph {
     public:
     
         Graph();
+
+        Graph(std::vector<std::string> airportVec, std::vector<std::string> routeVec);
         /**
          * Inserts an edge between two vertices (Airports).
          * 
@@ -22,6 +25,9 @@ class Graph {
          * @return if airports are adjacent
          */
         bool areAdjacent(Airport source, Airport destination);
+
+        void displayMatrix(int v);
+        // void buildAdjacencyMatrix();
 
     private:
         /**

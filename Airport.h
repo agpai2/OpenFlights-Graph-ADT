@@ -1,6 +1,6 @@
 /**
  * @file Aiport.h
- * Contains your declaration of the interface for the StickerSheet class.
+ * Contains our declaration of the interface for the Airport class.
  */
 #pragma once
 
@@ -15,8 +15,8 @@ class Airport {
     Airport();
 
     // Constructs an airport with below params
-    Airport(int id, string name, string city, string country, 
-    double lat, double longtitude, double tmz);
+    Airport(int id, string name, string city, string iataCode, 
+    string icaoCode, double lat, double longitude);
 
     // Gets the id of the airport
     int getId();
@@ -53,4 +53,10 @@ class Airport {
     // Hours offset from UTC. 
     // Fractional hours are expressed as decimals, eg. India is 5.5
     double timezone_;
+
+    // 3-letter IATA code of the airport
+    std::string iataCode_;
+
+    // 4-letter ICAO code of the airport
+    std::string icaoCode_;
 };

@@ -1,7 +1,7 @@
 #include "Airport.h"
 
 Airport::Airport() {
-  id_ = 0;
+  id_ = 134;
   name_ = "";
   city_ = "";
   country_ = "";
@@ -10,16 +10,27 @@ Airport::Airport() {
   timezone_ = 0.0;
 } 
 
-Airport::Airport(int id, string name, string city, string country,
-          double lat, double longtitude, double tmz) {
+// Airport::Airport(int id, string name, string city, string country,
+//           double lat, double longtitude, double tmz) {
   
+//   id_ = id;
+//   name_ = name;
+//   city_ = city;
+//   country_ = country;
+//   latitude_ = lat;
+//   longitude_ = longtitude;
+//   timezone_ = tmz;
+// }
+
+Airport::Airport(int id, string name, string city, string iataCode, string icaoCode,
+          double lat, double longitude) {
   id_ = id;
   name_ = name;
   city_ = city;
-  country_ = country;
+  iataCode_ = iataCode;
+  icaoCode_ = icaoCode;
   latitude_ = lat;
-  longitude_ = longtitude;
-  timezone_ = tmz;
+  longitude_ = longitude;
 }
 
 int Airport::getId() {
