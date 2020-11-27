@@ -42,8 +42,12 @@ Graph.o: Graph.cpp Graph.h
 Airport.o: Airport.cpp Airport.h
 	$(CXX) $(CXXFLAGS) Airport.cpp
 
-test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp
-	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp $(LDFLAGS) -o test
+test: output_msg catch/catchmain.cpp tests/GraphTests.cpp readFromFile.cpp Graph.cpp Airport.cpp
+	$(LD) catch/catchmain.cpp tests/GraphTests.cpp readFromFile.cpp Graph.cpp Airport.cpp
+	$(LDFLAGS) -o test
+
+tests.o: tests/GraphTests.cpp catch/catch.hpp Graph.h Airport.h
+	$(CXX) $(CXXFLAGS) tests/GraphTests.cpp
 
 clean:
 	-rm -f *.o $(EXENAME) test

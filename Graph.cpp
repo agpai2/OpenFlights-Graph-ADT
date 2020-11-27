@@ -108,6 +108,14 @@ void Graph::BFS(int start) {
     } 
 }
 
+int Graph::getNumVertices() {
+    return adjMatrix[0].size();
+}
+
+vector<vector<double>> Graph::getAdjacencyMatrix() {
+    return adjMatrix;
+}
+
 
 
 

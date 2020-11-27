@@ -1,7 +1,8 @@
 #pragma once
+
 #include "Airport.h"
-#include "Route.h"
 #include <map>
+
 class Graph {
     public:
     
@@ -34,6 +35,16 @@ class Graph {
          * @param start the index of the node to start the traversal from
          */
         void BFS(int start);
+
+        /** 
+         * Returns the number of vertices (Airports) of graph
+         */
+        int getNumVertices();
+
+        /** 
+         * Returns the adjacency matrix
+         */
+        vector<vector<double>> getAdjacencyMatrix();
         
     private:
         /**
