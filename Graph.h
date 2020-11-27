@@ -27,8 +27,14 @@ class Graph {
         bool areAdjacent(Airport source, Airport destination);
 
         void displayMatrix(int v);
-        // void buildAdjacencyMatrix();
 
+        /**
+         * Does a Breadth-First Traversal of the graph.
+         * 
+         * @param start the index of the node to start the traversal from
+         */
+        void BFS(int start);
+        
     private:
         /**
          * Calculates the distance between two airports using its latitudes and longitudes.
@@ -41,4 +47,5 @@ class Graph {
         double euclideanDistance(Airport source, Airport destination);
 
         vector<vector<double>> adjMatrix;
+
 };

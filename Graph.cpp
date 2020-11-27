@@ -3,6 +3,7 @@
 #include <map>
 #include <iostream>
 #include <vector>
+#include <queue>
 
 Graph::Graph() {
    adjMatrix.resize(100, std::vector<double>(100, 0));
@@ -71,6 +72,40 @@ double Graph::euclideanDistance(Airport source, Airport destination) {
     distance = distance * R;
 
     return distance;
+}
+
+void Graph::BFS(int start) {
+
+    // Initially, none of the nodes have been visited
+    vector<bool> visited(adjMatrix[0].size(), false);
+
+    // Visit the start node and also enqueue this start node
+    visited[start] = true;
+    std::queue<int> q;
+    q.push(start);
+
+    int curr;
+    while (!q.empty()) { 
+        curr = q.front(); 
+  
+        // Print the current node 
+        cout << curr << " "; 
+        q.pop();
+  
+        // For every vertex v that is adjacent to the current vertex,
+        // if it has not been already marked as visited, push v to
+        // the queue and mark it as visited,
+        for (int i = 0; i < adjMatrix[0].size(); i++) { 
+            if (adjMatrix[curr][i] != 0 && (!visited[i])) { 
+  
+                // Push the adjacent node to the queue 
+                q.push(i); 
+  
+                // Set this adjacent node to "visited"
+                visited[i] = true; 
+            } 
+        } 
+    } 
 }
 
 
