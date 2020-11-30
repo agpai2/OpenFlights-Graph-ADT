@@ -1,5 +1,7 @@
 #include "Airport.h"
 
+using namespace std;
+
 Airport::Airport() {
   id_ = 0;
   name_ = "";

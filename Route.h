@@ -3,7 +3,7 @@
  * Contains our declaration of the interface for the Route class.
  */
 #pragma once
-#include <string.h>
+#include <string>
 #include "readFromFile.hpp"
 using namespace std;
 

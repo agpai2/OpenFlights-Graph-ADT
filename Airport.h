@@ -4,7 +4,7 @@
  */
 #pragma once
 
-#include <string.h>
+#include <string>
 #include "readFromFile.hpp"
 
 using namespace std;

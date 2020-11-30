@@ -21,8 +21,6 @@ else
 CLANG_VERSION_MSG = $(warning $(ccyellow) Looks like you are not on EWS. Be sure to test on EWS before the deadline. $(ccend))
 endif
 
-.PHONY: all test clean output_msg
-
 all : $(EXENAME)
 
 output_msg: ; $(CLANG_VERSION_MSG)
@@ -42,12 +40,13 @@ Graph.o: Graph.cpp Graph.h
 Airport.o: Airport.cpp Airport.h
 	$(CXX) $(CXXFLAGS) Airport.cpp
 
-test: output_msg catch/catchmain.cpp tests/GraphTests.cpp readFromFile.cpp Graph.cpp Airport.cpp
-	$(LD) catch/catchmain.cpp tests/GraphTests.cpp readFromFile.cpp Graph.cpp Airport.cpp
-	$(LDFLAGS) -o test
+test: output_msg tests.o readFromFile.o Graph.o Airport.o
+	$(LD) tests.o readFromFile.o Graph.o Airport.o $(LDFLAGS) -o test
 
-tests.o: tests/GraphTests.cpp catch/catch.hpp Graph.h Airport.h
-	$(CXX) $(CXXFLAGS) tests/GraphTests.cpp
+tests.o: tests/tests.cpp catch/catch.hpp Graph.h Airport.h readFromFile.hpp
+	$(CXX) $(CXXFLAGS) tests/tests.cpp
 
 clean:
 	-rm -f *.o $(EXENAME) test
+
+.PHONY: all test clean output_msg
