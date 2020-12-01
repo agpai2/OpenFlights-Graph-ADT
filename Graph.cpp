@@ -14,7 +14,7 @@ Graph::Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, s
     adjMatrix.resize(airportMap[0].size(), std::vector<double>(airportMap[0].size(), 0));
 
     std::map<std::string, Airport> airportCodeMap;
-    for (int i = 0; i < airportMap[0].size(); i++) {
+    for (size_t i = 0; i < airportMap[0].size(); i++) {
         
         Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
                                 airportMap[4][i], airportMap[5][i], std::stod(airportMap[6][i]), std::stod(airportMap[7][i]));
@@ -22,7 +22,7 @@ Graph::Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, s
         airportCodeMap[airportMap[4][i]] = airportTemp;
     }
     
-    for (int i = 0; i < routeMap[0].size(); i++) {
+    for (size_t i = 0; i < routeMap[0].size(); i++) {
         if (airportCodeMap.count(routeMap[2][i]) != 0 && airportCodeMap.count(routeMap[4][i]))
             addEdge(airportCodeMap[routeMap[2][i]], airportCodeMap[routeMap[4][i]]);
     }
@@ -95,7 +95,7 @@ void Graph::BFS(int start) {
         // For every vertex v that is adjacent to the current vertex,
         // if it has not been already marked as visited, push v to
         // the queue and mark it as visited,
-        for (int i = 0; i < adjMatrix[0].size(); i++) { 
+        for (size_t i = 0; i < adjMatrix[0].size(); i++) { 
             if (adjMatrix[curr][i] != 0 && (!visited[i])) { 
   
                 // Push the adjacent node to the queue 
