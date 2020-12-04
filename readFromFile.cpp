@@ -47,6 +47,7 @@ std::map<int, std::vector<std::string>> csv_reader(const std::string &filename) 
 	std::map<int, std::vector<std::string>> result;
 
 	if (file.good()) {
+		std::getline(file, line);
 		while (std::getline(file, line)) {
 			std::stringstream ss(line);
 			int count = 0;

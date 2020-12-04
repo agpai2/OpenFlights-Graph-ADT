@@ -1,15 +1,16 @@
-1,hub,Ban Na,Thailand,THB,JPM^B,14.2559497,101.0315823,0,Asia/Bangkok,p23jg9w3,5C8Mra6,Roa31cnY8OI,CqZaLqFaT
-2,function,Chợ Gạo,Vietnam,VND,GTN,10.3793903,106.4541903,1849,Asia/Ho_Chi_Minh,bX5VHnGIR,mcqsQIr,UOnMt0a,lejp2A1jrx
-3,tertiary,Grammatikó,Greece,EUR,CYRXW,38.2031194,23.9632194,0,Europe/Athens,mil3j8TxEFz,aYQuiBO,5Ubdf8Ev2,xJLlgRZT50bh
-4,software,Porsgrunn,Norway,NOK,SUN,59.1499143,9.6586061,439,Europe/Oslo,J0U2zpUB,cXKSfQFSWnI,5VAaTy,zjb8CQfpH
-5,service-desk,Zgornje Bitnje,Slovenia,EUR,QTRH,46.2209242,14.3353423,53350,Europe/Ljubljana,gbVNVW2USj,mW1WQG,8TOdgitRJi1,Fy16Hracbn
+id,name,city,country,iata,icao,latitude,longitude,altitude,timezone,dst,tz database,type,source
+1,hub,Ban Na,Thailand,PEN,JPM^B,14.2559497,101.0315823,0,Asia/Bangkok,p23jg9w3,5C8Mra6,Roa31cnY8OI,CqZaLqFaT
+2,function,Chợ Gạo,Vietnam,JMD,GTN,10.3793903,106.4541903,1849,Asia/Ho_Chi_Minh,bX5VHnGIR,mcqsQIr,UOnMt0a,lejp2A1jrx
+3,tertiary,Grammatikó,Greece,CNY,CYRXW,38.2031194,23.9632194,0,Europe/Athens,mil3j8TxEFz,aYQuiBO,5Ubdf8Ev2,xJLlgRZT50bh
+4,software,Porsgrunn,Norway,BRL,SUN,59.1499143,9.6586061,439,Europe/Oslo,J0U2zpUB,cXKSfQFSWnI,5VAaTy,zjb8CQfpH
+5,service-desk,Zgornje Bitnje,Slovenia,CZK,QTRH,46.2209242,14.3353423,53350,Europe/Ljubljana,gbVNVW2USj,mW1WQG,8TOdgitRJi1,Fy16Hracbn
 6,Configurable,Phú Mỹ,Vietnam,VND,OPK,14.2157645,109.1166566,588,Asia/Ho_Chi_Minh,j8WPfytdt,qoa9hipE,ItnCy0L,v6JeDgBIcu1
 7,Versatile,Quisao,Philippines,PHP,HDNG,14.4392961,121.3345633,06,Asia/Manila,sM2Ix1Ge93,dP9iKXBbx,Vk8Fo3m,VOFY0NnkT
 8,executive,Vårgårda,Sweden,SEK,SHOS,59.2689705,17.9879854,45224,Europe/Stockholm,9LS6RkfAYN,qbtaGn,w5gMKHt6,CjtFcL3QT
 9,Customer-focused,Kurunegala,Sri Lanka,LKR,ZTS,7.47717,80.384199,4,Asia/Colombo,lue5zp4oklr,j5DO4bZU,g5PaOU4DszWj,UzU69L
-10,neural-net,San Juan,Philippines,PHP,HIIQ,14.565668,121.0317737,77,Asia/Manila,jrl1AvpBJj4L,OemxIWyVRib6,2vgpIkkh,AKkmwguKr
+10,neural-net,San Juan,Philippines,UAH,HIIQ,14.565668,121.0317737,77,Asia/Manila,jrl1AvpBJj4L,OemxIWyVRib6,2vgpIkkh,AKkmwguKr
 11,next generation,Iganga,Uganda,UGX,EBR,0.6045833,33.4719832,8,Africa/Kampala,OCM06UZT6x2A,ZAnCVo8KG,KiNNLNKD75,ZKr5xQ
-12,knowledge base,Tapas,Philippines,PHP,CHUBK,10.305562,123.897862,0388,Asia/Manila,Iwpdntc,rVlBMUW4gJ,nctBxiQka,1buVmxcfgvN
+12,knowledge base,Tapas,Philippines,PLN,CHUBK,10.305562,123.897862,0388,Asia/Manila,Iwpdntc,rVlBMUW4gJ,nctBxiQka,1buVmxcfgvN
 13,Universal,Rothesay Bay,New Zealand,NZD,SEP,-46.2763744,168.3661011,950,Pacific/Auckland,4Mg8JRp3UI,9v9oPnJ78,PuhXvUfB,hyrIpLWoCLx
 14,Optional,Bibis,Indonesia,IDR,OPOF,-7.6435908,111.3754214,4880,Asia/Jakarta,XlOmLZ1s8ica,o5KIRt6,tTMJTPXffkw,g4wT71xKHgnJ
 15,middleware,Novogireyevo,Russia,RUB,NSSC,55.7483994,37.8009297,073,Europe/Moscow,YpVExfEM3Xv,GZLuYUodw7nr,rCUXMATDr,C3oM59O
