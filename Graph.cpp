@@ -117,6 +117,49 @@ vector<vector<double>> Graph::getAdjacencyMatrix() {
 }
 
 
+double manhattanDistance(Airport source, Airport destination) {
+
+    //Make this part a function later on
+
+    long double one_deg = (M_PI) / 180;
+
+    double source_lat = one_deg * source.getLatitude();
+    double source_long = one_deg * source.getLongitude();
+    double dest_lat = one_deg * destination.getLatitude();
+    double dest_long = one_deg * destination.getLongitude();
+        // Haversine Formula
+    long double dlong = dest_long - source_long;
+    long double dlat = dest_lat - source_lat;
+
+    return abs(dlong) + abs(dlat);
+
+}
+
+
+double chebyshevDistance(Airport source, Airport destination) {
+
+    long double one_deg = (M_PI) / 180;
+
+    double source_lat = one_deg * source.getLatitude();
+    double source_long = one_deg * source.getLongitude();
+    double dest_lat = one_deg * destination.getLatitude();
+    double dest_long = one_deg * destination.getLongitude();
+        // Haversine Formula
+    long double dlong = dest_long - source_long;
+    long double dlat = dest_lat - source_lat;
+
+    return max(abs(dlong), abs(dlat));
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
