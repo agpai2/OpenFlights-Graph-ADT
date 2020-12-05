@@ -144,12 +144,12 @@ double Graph::manhattanDistance(Airport source, Airport destination) {
     double source_long = one_deg * source.getLongitude();
     double dest_lat = one_deg * destination.getLatitude();
     double dest_long = one_deg * destination.getLongitude();
-        // Haversine Formula
+
+    // Haversine Formula
     long double dlong = dest_long - source_long;
     long double dlat = dest_lat - source_lat;
 
     return abs(dlong) + abs(dlat);
-
 }
 
 
@@ -169,9 +169,8 @@ double Graph::chebyshevDistance(Airport source, Airport destination) {
 }
 
   
-int Graph::minDist(std::vector<int>& dist,  
-                std::vector<bool>  &reached) { 
-    int min = INT_MAX, 
+int Graph::minDist(std::vector<int>& dist, std::vector<bool>  &reached) { 
+    int min = INT_MAX; 
     int minIndex; 
 
     for (int vertex = 0; vertex < getNumVertices(); vertex++) {
@@ -195,8 +194,7 @@ void Graph::printShortestPath(std::vector<int> &parent, int j)
     std::cout << j << std::endl;
 } 
 
-int Graph::printSolution(std::vector<int> dist, int n,  
-                      std::vector<int> parent, int src) {   
+int Graph::printSolution(std::vector<int> dist, std::vector<int> parent, int src) {   
     for (int i = 0; i < getNumVertices(); i++) { 
         if (dist[i] == INT_MAX) continue;
         std::cout << src << " " << i << dist[i] << std::endl;
@@ -242,5 +240,5 @@ void Graph::djikstra(std::string source) {
         }
     } 
 
-    printSolution(distVec, numVertices, parentVec, src); 
+    printSolution(distVec, parentVec, src); 
 }
