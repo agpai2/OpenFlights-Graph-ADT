@@ -46,6 +46,13 @@ class Graph {
          */
         vector<vector<double>> getAdjacencyMatrix();
         
+        /* A utility function to find the  
+        vertex with minimum distance 
+        value, from the set of vertices 
+        not yet included in shortest 
+        path tree */
+        void djikstra(std::string src);
+        
     private:
         /**
          * Calculates the distance between two airports using its latitudes and longitudes.
@@ -57,6 +64,23 @@ class Graph {
          */
         double euclideanDistance(Airport source, Airport destination);
 
+        double manhattanDistance(Airport source, Airport destination);
+
+        double chebyshevDistance(Airport source, Airport destination);
+
         vector<vector<double>> adjMatrix;
+        
+        std::map<std::string, Airport> airportCodeMap;
+
+        int minDist(std::vector<int>& dist,  
+                std::vector<bool>  &reached);
+
+        void printShortestPath(std::vector<int> &parent, int j);
+
+        int printSolution(std::vector<int> dist, int n,  
+                      std::vector<int> parent, int src) ;
+
+        int getIncidentEdges(int airportIndex);
+   
 
 };

@@ -4,26 +4,31 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <limits.h> 
 
 Graph::Graph() {
    adjMatrix.resize(100, std::vector<double>(100, 0));
+
 }
 
 Graph::Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, std::vector<std::string>> routeMap) {
 
     adjMatrix.resize(airportMap[0].size(), std::vector<double>(airportMap[0].size(), 0));
 
-    std::map<std::string, Airport> airportCodeMap;
     for (size_t i = 0; i < airportMap[0].size(); i++) {
         
-        Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
+        if (airportMap[4][i].length() > 0) {
+            Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
                                 airportMap[4][i], airportMap[5][i], std::stod(airportMap[6][i]), std::stod(airportMap[7][i]));
         
-        airportCodeMap[airportMap[4][i]] = airportTemp;
+            airportCodeMap[airportMap[4][i]] = airportTemp;
+        }
     }
+
+    //adjMatrix.resize(airportCodeMap.size(), std::vector<double>(airportCodeMap.size(), 0));
     
     for (size_t i = 0; i < routeMap[0].size(); i++) {
-        if (airportCodeMap.count(routeMap[2][i]) != 0 && airportCodeMap.count(routeMap[4][i]))
+        if (airportCodeMap.count(routeMap[2][i]) != 0 && airportCodeMap.count(routeMap[4][i]) != 0)
             addEdge(airportCodeMap[routeMap[2][i]], airportCodeMap[routeMap[4][i]]);
     }
 
@@ -109,7 +114,19 @@ void Graph::BFS(int start) {
 }
 
 int Graph::getNumVertices() {
-    return adjMatrix[0].size();
+    return adjMatrix[0].size(); 
+}
+
+int Graph::getIncidentEdges(int airportIndex) {
+    
+    int dest = 0;
+    for (size_t i = 0; i < adjMatrix[airportIndex - 1].size(); i++) {
+        if (adjMatrix[airportIndex - 1][i] != 0) {
+        dest++;
+        }
+    }
+    return dest;
+
 }
 
 vector<vector<double>> Graph::getAdjacencyMatrix() {
@@ -117,7 +134,7 @@ vector<vector<double>> Graph::getAdjacencyMatrix() {
 }
 
 
-double manhattanDistance(Airport source, Airport destination) {
+double Graph::manhattanDistance(Airport source, Airport destination) {
 
     //Make this part a function later on
 
@@ -136,7 +153,7 @@ double manhattanDistance(Airport source, Airport destination) {
 }
 
 
-double chebyshevDistance(Airport source, Airport destination) {
+double Graph::chebyshevDistance(Airport source, Airport destination) {
 
     long double one_deg = (M_PI) / 180;
 
@@ -151,15 +168,79 @@ double chebyshevDistance(Airport source, Airport destination) {
     return max(abs(dlong), abs(dlat));
 }
 
+  
+int Graph::minDist(std::vector<int>& dist,  
+                std::vector<bool>  &reached) { 
+    int min = INT_MAX, 
+    int minIndex; 
 
+    for (int vertex = 0; vertex < getNumVertices(); vertex++) {
+        if (reached[vertex] == false && dist[vertex] <= min) {
+            min = dist[vertex], minIndex = vertex; 
+        }
+    }
+  
+    return minIndex; 
+} 
+  
+void Graph::printShortestPath(std::vector<int> &parent, int j) 
+{ 
+      
+    // base case; if j is the source then stop 
+    if (parent[j] == - 1) 
+        return; 
+  
+    printShortestPath(parent, parent[j]); 
+  
+    std::cout << j << std::endl;
+} 
 
+int Graph::printSolution(std::vector<int> dist, int n,  
+                      std::vector<int> parent, int src) {   
+    for (int i = 0; i < getNumVertices(); i++) { 
+        if (dist[i] == INT_MAX) continue;
+        std::cout << src << " " << i << dist[i] << std::endl;
+        printShortestPath(parent, i); 
+    } 
+    return 0;
+} 
+  
+void Graph::djikstra(std::string source) {  
 
+    int src = airportCodeMap[source].getId() - 1;
+    const int numVertices = getNumVertices(); 
 
+    std::vector<int> distVec(numVertices);
+    std::vector<bool> reachedVec(numVertices);
+    std::vector<int> parentVec(numVertices); 
 
+    // distance of the source node from itself is 0
+    distVec[src] = 0;
+  
+    // the path starts at the source
+    parentVec[src] = -1;
 
+    for (int i = 0; i < numVertices; i++) { 
+        if (i != src)
+            distVec[i] = INT_MAX; 
 
+        reachedVec[i] = false; 
+    } 
+  
+    distVec[src] = 0; 
+  
+    for (int i = 0; i < numVertices; i++) { 
+        int u = minDist(distVec, reachedVec); 
+  
+        reachedVec[u] = true; 
+   
+        for (int v = 0; v < numVertices; v++) { 
+            if (!reachedVec[v] && adjMatrix[u][v] && (distVec[u] + adjMatrix[u][v] < distVec[v])) { 
+                parentVec[v] = u; 
+                distVec[v] = distVec[u] + adjMatrix[u][v]; 
+            }  
+        }
+    } 
 
-
-
-
-
+    printSolution(distVec, numVertices, parentVec, src); 
+}
