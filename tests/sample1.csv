@@ -6,7 +6,7 @@ id,name,city,country,iata,icao,latitude,longitude,altitude,timezone,dst,tz datab
 5,service-desk,Zgornje Bitnje,Slovenia,CZK,QTRH,46.2209242,14.3353423,53350,Europe/Ljubljana,gbVNVW2USj,mW1WQG,8TOdgitRJi1,Fy16Hracbn
 6,Configurable,Phú Mỹ,Vietnam,VND,OPK,14.2157645,109.1166566,588,Asia/Ho_Chi_Minh,j8WPfytdt,qoa9hipE,ItnCy0L,v6JeDgBIcu1
 7,Versatile,Quisao,Philippines,PHP,HDNG,14.4392961,121.3345633,06,Asia/Manila,sM2Ix1Ge93,dP9iKXBbx,Vk8Fo3m,VOFY0NnkT
-8,executive,Vårgårda,Sweden,SEK,SHOS,59.2689705,17.9879854,45224,Europe/Stockholm,9LS6RkfAYN,qbtaGn,w5gMKHt6,CjtFcL3QT
+8,executive,Vårgårda,Sweden,EUR,SHOS,59.2689705,17.9879854,45224,Europe/Stockholm,9LS6RkfAYN,qbtaGn,w5gMKHt6,CjtFcL3QT
 9,Customer-focused,Kurunegala,Sri Lanka,LKR,ZTS,7.47717,80.384199,4,Asia/Colombo,lue5zp4oklr,j5DO4bZU,g5PaOU4DszWj,UzU69L
 10,neural-net,San Juan,Philippines,UAH,HIIQ,14.565668,121.0317737,77,Asia/Manila,jrl1AvpBJj4L,OemxIWyVRib6,2vgpIkkh,AKkmwguKr
 11,next generation,Iganga,Uganda,UGX,EBR,0.6045833,33.4719832,8,Africa/Kampala,OCM06UZT6x2A,ZAnCVo8KG,KiNNLNKD75,ZKr5xQ

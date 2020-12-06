@@ -29,6 +29,31 @@ class Graph {
         bool areAdjacent(Airport source, Airport destination);
 
         /** 
+         * Returns the number of vertices (Airports) of graph
+         */
+        int getNumVertices();
+
+        /** 
+         * Computes the number of incident edges from a given vertex,
+         * where vertex is an airport and edges are destinations in this case
+         * 
+         * @param airportIndex - the index of the airport in the adjacency matrix
+         * 
+         * @return the number of or incident edges from a given vertex
+         */
+        int getIncidentEdges(int airportIndex);
+
+        /** 
+         * Returns the airport code map
+         */
+        std::map<std::string, Airport> getAirportCodeMap();
+
+        /** 
+         * Returns the adjacency matrix
+         */
+        vector<vector<double>> getAdjacencyMatrix();
+
+        /** 
          * Displays the elements of the adjacency matrix
          * 
          * @param v - the dimension of adjacency matrix
@@ -43,18 +68,29 @@ class Graph {
         void BFS(int start);
 
         /** 
-         * Returns the number of vertices (Airports) of graph
+         * Finds the shortest path between vertices in a graph, where 
+         * the vertices are airports in this case
+         *
+         * @param src - the index of the source vertex
+         * @param dest - the index of the destination vertex
+         *
+         * @return the shortest path between vertices in a graph
          */
-        int getNumVertices();
-
-        /** 
-         * Returns the adjacency matrix
-         */
-        vector<vector<double>> getAdjacencyMatrix();
-
         std::vector<int> djikstra(int src, int dest);
 
-        std::vector<int> landmarkPath(std::string startNode, std::string intermediateNode, std::string endNode);
+        /** 
+         * Finds the shortest path between two vertices in a graph through an 
+         * intermediary vertex, where the vertices are airports in this case
+         *
+         * @param startNode - the starting vertex/node
+         * @param intermediateNode - the intermediary vertex/node
+         * @param endNode - the ending vertex/node
+         *
+         * @return the shortest path between two vertices in a graph through an 
+         * intermediary vertex
+         */
+        std::vector<int> landmarkPath(std::string startNode, std::string intermediateNode, 
+            std::string endNode);
         
     private:
         /**
@@ -104,18 +140,11 @@ class Graph {
          * @param dist - a vector that holds the shortest distance from source airport to ith airport 
          * @param reached - a vector that contains bool values based on if the shortest distance
          * from source airport to ith airport is finalized
+         * 
+         * @return The minimum distance value from the set of vertices 
+         * not yet included in shortest path tree
          */
         int minDist(std::vector<int>& dist, std::vector<bool>  &reached);
-
-        /** 
-         * Computes the number of incident edges from a given vertex,
-         * where vertex is an airport and edges are destinations in this case
-         * 
-         * @param airportIndex - the index of the airport in the adjacency matrix
-         * 
-         * @return the number of or incident edges from a given vertex
-         */
-        int getIncidentEdges(int airportIndex);
 
         vector<vector<double>> adjMatrix;
 

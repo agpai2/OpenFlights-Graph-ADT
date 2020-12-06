@@ -16,28 +16,16 @@ Graph::Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, s
     adjMatrix.resize(airportMap[0].size(), std::vector<double>(airportMap[0].size(), 0));
 
     for (size_t i = 0; i < airportMap[0].size(); i++) {
+        Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
+                            airportMap[4][i], airportMap[5][i], std::stod(airportMap[6][i]), 
+                            std::stod(airportMap[7][i]));
         
-        // if (airportMap[4][i].length() == 3) {
-            Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
-                                airportMap[4][i], airportMap[5][i], std::stod(airportMap[6][i]), std::stod(airportMap[7][i]));
-        
-            airportCodeMap[airportMap[4][i]] = airportTemp;
-        
-        // } else {
-        //     Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
-        //                         "INVALID", airportMap[5][i], std::stod(airportMap[6][i]), std::stod(airportMap[7][i]));
-        
-        //     airportCodeMap[airportMap[4][i]] = airportTemp;
-        // }
+        airportCodeMap[airportMap[4][i]] = airportTemp;
     }
-
-    //adjMatrix.resize(airportCodeMap.size(), std::vector<double>(airportCodeMap.size(), 0));
     
     for (size_t i = 0; i < routeMap[0].size(); i++) {
         if (airportCodeMap.count(routeMap[2][i]) != 0 && airportCodeMap.count(routeMap[4][i]) != 0)
             addEdge(airportCodeMap[routeMap[2][i]], airportCodeMap[routeMap[4][i]]);
-
-        // TODO deal with invalid
     }
 
 }
@@ -88,6 +76,10 @@ double Graph::euclideanDistance(Airport source, Airport destination) {
 }
 
 void Graph::BFS(int start) {
+    if (getIncidentEdges(start) == 0) {
+        std::cout << "This airport has no destinations" << std::endl;
+        return;
+    }
 
     // Initially, none of the nodes have been visited
     vector<bool> visited(adjMatrix[0].size(), false);
@@ -128,8 +120,8 @@ int Graph::getNumVertices() {
 int Graph::getIncidentEdges(int airportIndex) {
     
     int dest = 0;
-    for (size_t i = 0; i < adjMatrix[airportIndex - 1].size(); i++) {
-        if (adjMatrix[airportIndex - 1][i] != 0) {
+    for (size_t i = 0; i < adjMatrix[airportIndex].size(); i++) {
+        if (adjMatrix[airportIndex][i] != 0) {
         dest++;
         }
     }
@@ -137,15 +129,15 @@ int Graph::getIncidentEdges(int airportIndex) {
 
 }
 
+std::map<std::string, Airport> Graph::getAirportCodeMap() {
+    return airportCodeMap;
+}
+
 vector<vector<double>> Graph::getAdjacencyMatrix() {
     return adjMatrix;
 }
 
-
 double Graph::manhattanDistance(Airport source, Airport destination) {
-
-    //Make this part a function later on
-
     long double one_deg = (M_PI) / 180;
 
     double source_lat = one_deg * source.getLatitude();
@@ -162,14 +154,14 @@ double Graph::manhattanDistance(Airport source, Airport destination) {
 
 
 double Graph::chebyshevDistance(Airport source, Airport destination) {
-
     long double one_deg = (M_PI) / 180;
 
     double source_lat = one_deg * source.getLatitude();
     double source_long = one_deg * source.getLongitude();
     double dest_lat = one_deg * destination.getLatitude();
     double dest_long = one_deg * destination.getLongitude();
-        // Haversine Formula
+
+    // Haversine Formula
     long double dlong = dest_long - source_long;
     long double dlat = dest_lat - source_lat;
 
@@ -191,7 +183,6 @@ int Graph::minDist(std::vector<int>& dist, std::vector<bool>  &reached) {
 } 
 
 std::vector<int> Graph::djikstra(int src, int dest) {  
-
     const int numVertices = getNumVertices(); 
 
     std::vector<int> distVec(numVertices);
@@ -228,7 +219,7 @@ std::vector<int> Graph::djikstra(int src, int dest) {
 
     vector<int> requiredPath;
     if (distVec[dest] != INT_MAX) {
-        std::cout << src << " " << dest << distVec[dest] << std::endl;
+        // std::cout << src << " " << dest << distVec[dest] << std::endl;
         int j = dest;
         while (parentVec[j] != -1) {
             requiredPath.push_back(parentVec[j]);
@@ -243,11 +234,10 @@ std::vector<int> Graph::djikstra(int src, int dest) {
 }
 
 std::vector<int> Graph::landmarkPath(std::string startNode, std::string intermediateNode, std::string endNode) {
-    
+
     int src = airportCodeMap[startNode].getId() - 1;
     int landmark = airportCodeMap[intermediateNode].getId() - 1;
     int dest = airportCodeMap[endNode].getId() - 1;
-    const int numVertices = getNumVertices(); 
 
     std::vector<int> landmarkPathSoln;
 
@@ -258,11 +248,11 @@ std::vector<int> Graph::landmarkPath(std::string startNode, std::string intermed
     std::vector<int> pathFromCToB = djikstra(landmark, dest);
 
     // combine the two vectors above and output that vector
-    for (int i = 0; i < pathFromAToC.size(); i++) {
+    for (size_t i = 0; i < pathFromAToC.size(); i++) {
         landmarkPathSoln.push_back(pathFromAToC[i]);
     }
 
-    for (int i = 0; i < pathFromCToB.size(); i++) {
+    for (size_t i = 0; i < pathFromCToB.size(); i++) {
         landmarkPathSoln.push_back(pathFromCToB[i]);
     }
 

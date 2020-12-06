@@ -10,7 +10,6 @@
 #include <unordered_set>
 #include <utility>
 #include <map>
-
 #include <string>
 
 std::vector<std::vector<double>> adjMatrix;
@@ -67,17 +66,8 @@ TEST_CASE("Number of vertices - Big Data", "[weight=2]") {
   REQUIRE(big_graph.getNumVertices() == airports[0].size());
 }
 
-TEST_CASE("Number of edges - Small Data", "[weight=1]") {
-
-}
-
-TEST_CASE("Number of edges - Big Data", "[weight=2]") {
-
-}
-
 TEST_CASE("Number of incident edges - Small Data", "[weight=1]") {
   std::string source = "PEN";
-  int source_idx = 0;
 
   std::unordered_set<std::string> destinations;
   for (size_t i = 0; i < sample_2[2].size(); i++) {
@@ -86,23 +76,11 @@ TEST_CASE("Number of incident edges - Small Data", "[weight=1]") {
     }
   }
 
-  for (size_t i = 0; i < sample_1[4].size(); i++) {
-    if (sample_1[4][i] == source) {
-      source_idx = i + 1;
-      break;
-    }
-  }
+  int source_idx = small_graph.getAirportCodeMap()[source].getId() - 1;
 
-  vector<vector<double>> adj_matrix = small_graph.getAdjacencyMatrix();
+  int dest = small_graph.getIncidentEdges(source_idx);
 
-  int dest = 0;
-  for (size_t i = 0; i < adj_matrix[source_idx - 1].size(); i++) {
-    if (adj_matrix[source_idx - 1][i] != 0) {
-      dest++;
-    }
-  }
-
-  // std::cout << "Sample IATA: " << sample_1[4][source_idx - 1] << std::endl;
+  // std::cout << "Sample IATA: " << sample_1[4][source_idx] << std::endl;
   // std::cout << "Destinations of PEN: " << edges << std::endl;
   // std::cout << "Index of PEN in sample1.csv: " << source_idx << std::endl;
   // std::cout << "Destinations of PEN in matrix: " << dest << std::endl;
@@ -111,7 +89,6 @@ TEST_CASE("Number of incident edges - Small Data", "[weight=1]") {
 
 TEST_CASE("Number of incident edges - Big Data", "[weight=2]") {
   std::string source_airport = "KZN";
-  int source_idx = 0;
 
   std::unordered_set<std::string> destinations;
   for (size_t i = 0; i < routes[2].size(); i++) {
@@ -120,23 +97,11 @@ TEST_CASE("Number of incident edges - Big Data", "[weight=2]") {
     }
   }
 
-  for (size_t i = 0; i < airports[4].size(); i++) {
-    if (airports[4][i] == source_airport) {
-      source_idx = i + 1;
-      break;
-    }
-  }
+  int source_idx = big_graph.getAirportCodeMap()[source_airport].getId() - 1;
 
-  vector<vector<double>> adj_matrix = big_graph.getAdjacencyMatrix();
+  int dest = big_graph.getIncidentEdges(source_idx);
 
-  int dest = 0;
-  for (size_t i = 0; i < adj_matrix[source_idx - 1].size(); i++) {
-    if (adj_matrix[source_idx - 1][i] != 0) {
-      dest++;
-    }
-  }
-
-  // std::cout << "Airport IATA: " << airports[4][source_idx - 1] << std::endl;
+  // std::cout << "Airport IATA: " << airports[4][source_idx] << std::endl;
   // std::cout << "Destinations of KZN: " << edges << std::endl;
   // std::cout << "Index of KZN in airports.csv: " << source_idx << std::endl;
   // std::cout << "Destinations of KZN in matrix: " << dest;
@@ -150,27 +115,11 @@ TEST_CASE("Check if nodes are adjacent - Small Data", "[weight=1]") {
   std::string src = sample_2[2][index];
   std::string destination = sample_2[4][index];
 
-  int source_idx = 0;
-  int dest_idx = 0;
+  int source_idx = small_graph.getAirportCodeMap()[src].getId() - 1;
+  int dest_idx = small_graph.getAirportCodeMap()[destination].getId() - 1;
 
-  bool source = false;
-  bool dest = false;
-  for (size_t i = 0; i < sample_1[4].size(); i++) {
-    if (sample_1[4][i] == src) {
-      source_idx = i + 1;
-      source = true;
-    } else if (sample_1[4][i] == destination) {
-      dest_idx = i + 1;
-      dest = true;
-    }
-
-    if (source && dest) {
-      break;
-    }
-  }
-
-  Airport s(source_idx, "", "", "", "", 0.0, 0.0);
-  Airport d(dest_idx, "", "", "", "", 0.0, 0.0);
+  Airport s(source_idx + 1, "", "", "", "", 0.0, 0.0);
+  Airport d(dest_idx + 1, "", "", "", "", 0.0, 0.0);
 
   REQUIRE(small_graph.areAdjacent(s, d));
 }
@@ -181,31 +130,55 @@ TEST_CASE("Check if nodes are adjacent - Big Data", "[weight=2]") {
   std::string source_airport = routes[2][index];
   std::string dest_airport = routes[4][index];
 
-  int source_idx = 0;
-  int dest_idx = 0;
+  int source_idx = big_graph.getAirportCodeMap()[source_airport].getId() - 1;
+  int dest_idx = big_graph.getAirportCodeMap()[dest_airport].getId() - 1;
 
-  bool source = false;
-  bool dest = false;
-  for (size_t i = 0; i < airports[4].size(); i++) {
-    if (airports[4][i] == source_airport) {
-      source_idx = i + 1;
-      source = true;
-    } else if (airports[4][i] == dest_airport) {
-      dest_idx = i + 1;
-      dest = true;
-    }
-
-    if (source && dest) {
-      break;
-    }
-  }
-
-  Airport s(source_idx, "", "", "", "", 0.0, 0.0);
-  Airport d(dest_idx, "", "", "", "", 0.0, 0.0);
+  Airport s(source_idx + 1, "", "", "", "", 0.0, 0.0);
+  Airport d(dest_idx + 1, "", "", "", "", 0.0, 0.0);
 
   REQUIRE(big_graph.areAdjacent(s, d));
 }
 
 TEST_CASE("Breadth First Traversal", "[weight=1]") {
 
+}
+
+TEST_CASE("Landmark Path - Small Data", "[weight=1]") {
+  std::vector<int> vec = small_graph.landmarkPath("PEN", "IDR", "BRL");
+
+  std::vector<std::string> path;
+  for (size_t i = 0; i < vec.size(); i++) {
+    path.push_back(sample_1[4][vec[i]]);
+	}
+
+  std::stringstream ss;
+  std::copy(path.begin(), path.end(),std::ostream_iterator<std::string>(ss, " "));
+
+  REQUIRE(ss.str() == "PEN IDR CNY BRL ");
+}
+
+TEST_CASE("Landmark Path - Big Data", "[weight=2]") {
+  std::vector<int> small_path = big_graph.landmarkPath("ASF", "MRV", "SCO");
+
+  std::vector<std::string> path1;
+  for (size_t i = 0; i < small_path.size(); i++) {
+    path1.push_back(airports[4][small_path[i]]);
+	}
+
+  std::stringstream ss1;
+  std::copy(path1.begin(), path1.end(),std::ostream_iterator<std::string>(ss1, " "));
+
+  REQUIRE(ss1.str() == "ASF MRV SCO ");
+
+  std::vector<int> big_path = big_graph.landmarkPath("GKA", "CNY", "KZN");
+
+  std::vector<std::string> path2;
+  for (size_t i = 0; i < big_path.size(); i++) {
+    path2.push_back(airports[4][big_path[i]]);
+	}
+
+  std::stringstream ss2;
+  std::copy(path2.begin(), path2.end(),std::ostream_iterator<std::string>(ss2, " "));
+
+  REQUIRE(ss2.str() == "GKA POM NAN LAX SLC CNY SLC YYC YEG KEF HEL LED KZN ");
 }
