@@ -52,11 +52,9 @@ class Graph {
          */
         vector<vector<double>> getAdjacencyMatrix();
 
-        /** 
-         * Finds the vertex with minimum distance value from the 
-         * set of vertices not yet included in shortest path tree 
-         */
-        void djikstra(std::string src);
+        std::vector<int> djikstra(int src, int dest);
+
+        std::vector<int> landmarkPath(std::string startNode, std::string intermediateNode, std::string endNode);
         
     private:
         /**
@@ -108,25 +106,6 @@ class Graph {
          * from source airport to ith airport is finalized
          */
         int minDist(std::vector<int>& dist, std::vector<bool>  &reached);
-
-        /** 
-         * A helper function for djikstra's algorithm
-         * 
-         * Prints the shortest path from the source vertex to all other 
-         * vertices, where vertices are the airports
-         */
-        void printShortestPath(std::vector<int> &parent, int j);
-
-        /** 
-         * A helper function for djikstra's algorithm
-         * 
-         * Prints the constructed distance array 
-         * 
-         * @param dist - a vector that holds the shortest distance from source airport to ith airport 
-         * @param parent - 
-         * @param src - the id of the source airport
-         */
-        int printSolution(std::vector<int> dist, std::vector<int> parent, int src) ;
 
         /** 
          * Computes the number of incident edges from a given vertex,

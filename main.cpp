@@ -11,5 +11,9 @@ int main(int argc, const char * argv[]) {
 	Graph graph(airportMap, routeMap);
 	//graph.displayMatrix(30);
 	//graph.BFS(0);
-	graph.djikstra("GKA");
+	std::vector<int> vec = graph.landmarkPath("GKA", "CNY", "KZN");
+
+	for (int i = 0; i < vec.size(); i++) {
+		std::cout << airportMap[4][vec[i]] << ", ";
+	}
 }
