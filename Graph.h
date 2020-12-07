@@ -94,8 +94,19 @@ class Graph {
         std::vector<int> landmarkPath(std::string startNode, std::string intermediateNode, 
             std::string endNode);
 
-        void mapPlot(std::vector<string> optionalLandmarkVector);
-        
+        /** 
+         * Plots all of the airports from the dataset onto the world map
+         */
+        void plotAirports();
+
+        /** 
+         * Plots all of the airports from the dataset onto the world map
+         * 
+         * @param path - the path from one airport to another through an
+         * intermediary airport
+         */
+        void plotLandmarkPath(std::vector<string> path);
+
     private:
         /**
          * Calculates the distance between two airports using its latitudes and longitudes.
@@ -153,6 +164,4 @@ class Graph {
         vector<vector<double>> adjMatrix;
 
         std::map<std::string, Airport> airportCodeMap;
-
-       
 };
