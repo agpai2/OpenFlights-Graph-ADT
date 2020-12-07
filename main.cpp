@@ -15,6 +15,7 @@ int main(int argc, const char * argv[]) {
 
 	// graph.displayMatrix(30);
 	// graph.BFS(0);
+	/*
 	std::vector<int> vec = graph.landmarkPath("GKA", "CNY", "KZN");
 
 	std::vector<std::string> path;
@@ -26,4 +27,7 @@ int main(int argc, const char * argv[]) {
   std::copy(path.begin(), path.end(),std::ostream_iterator<std::string>(ss, " "));
 
 	std::cout << ss.str() << std::endl;
+	*/
+	std::vector<std::string> m;
+	graph.mapPlot(m);
 }

@@ -1,5 +1,9 @@
 EXENAME = main
-OBJS = readFromFile.o main.o Graph.o Airport.o
+OBJS = readFromFile.o main.o Graph.o Airport.o 
+
+# Use the cs225 makefile template:
+include cs225/make/cs225.mk
+
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -45,6 +49,8 @@ test: output_msg tests.o readFromFile.o Graph.o Airport.o
 
 tests.o: tests/tests.cpp catch/catch.hpp Graph.h Airport.h readFromFile.hpp
 	$(CXX) $(CXXFLAGS) tests/tests.cpp
+
+
 
 clean:
 	-rm -f *.o $(EXENAME) test

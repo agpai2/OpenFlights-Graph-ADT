@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Airport.h"
+#include "cs225/PNG.h"
+#include "cs225/HSLAPixel.h"
 #include <map>
 
 class Graph {
@@ -91,6 +93,8 @@ class Graph {
          */
         std::vector<int> landmarkPath(std::string startNode, std::string intermediateNode, 
             std::string endNode);
+
+        void mapPlot(std::vector<string> optionalLandmarkVector);
         
     private:
         /**
@@ -149,4 +153,6 @@ class Graph {
         vector<vector<double>> adjMatrix;
 
         std::map<std::string, Airport> airportCodeMap;
+
+       
 };

@@ -6,6 +6,8 @@
 #include <queue>
 #include <limits.h> 
 
+using namespace cs225;
+
 Graph::Graph() {
    adjMatrix.resize(100, std::vector<double>(100, 0));
 
@@ -260,4 +262,53 @@ std::vector<int> Graph::landmarkPath(std::string startNode, std::string intermed
     landmarkPathSoln.push_back(dest);
 
     return landmarkPathSoln;
+}
+
+
+
+
+void Graph::mapPlot(std::vector<string> optionalLandmarkVector) {
+
+        cs225::PNG plottedMap;
+        cs225::PNG open;
+        open.readFromFile("openflights.png");
+        plottedMap.readFromFile("newmap.png");
+        
+        double width = plottedMap.width();
+        double height = plottedMap.height();
+        std::cout << width << " witdh" << height << " height" << std::endl;
+        std::cout << open.width() << " witdh 1" << open.height() << " height 1" << std::endl;
+
+        for(std::map<string,Airport>::iterator it = airportCodeMap.begin(); it != airportCodeMap.end(); ++it) {
+
+        
+        double lon = it->second.getLongitude();
+        double lat = it->second.getLatitude();
+
+        double temp_lat = lat >= 0 ? 90 - lat : 90 + abs(lat);
+        double temp_long = lon + 180;
+
+        double y = (temp_lat/181)*plottedMap.height();
+        double x = (temp_long/361)*plottedMap.width();    
+        for (int i = -1; i < 1; i++) {
+            HSLAPixel &pixel = plottedMap.getPixel(x + i,y);
+            HSLAPixel airportPixel(28, 1, 0.5, 1);
+            pixel = airportPixel;
+        }
+
+        //HSLAPixel &pixel = plottedMap.getPixel(x,y);
+        //HSLAPixel airportPixel(0,1,0.5,1);
+        //pixel = airportPixel;
+
+        
+
+
+
+        }
+
+            
+    plottedMap.writeToFile("world_map_work.png");
+
+        
+
 }
