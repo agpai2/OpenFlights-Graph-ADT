@@ -31,6 +31,8 @@ the tests
     * Djikstra's Algorithm
     * Visualization of Graph on a world map
 
+    A more detailed description of the goals has also been added to the GOALS.md document.
+
 3. Added functions to visualize the airports on a world map
 
 4. Wrote a few more test cases to test validity of our code 
