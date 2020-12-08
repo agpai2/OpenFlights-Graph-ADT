@@ -36,14 +36,13 @@ class Graph {
         int getNumVertices();
 
         /** 
-         * Computes the number of incident edges from a given vertex,
-         * where vertex is an airport and edges are destinations in this case
+         * Computes the number of destinations that can be reached from a given airport.
          * 
-         * @param airportIndex - the index of the airport in the adjacency matrix
+         * @param startAirport - the matrix index of the source airport in the adjacency matrix
          * 
-         * @return the number of or incident edges from a given vertex
+         * @return the number of destinations corresponding to startAirport
          */
-        int getIncidentEdges(int airportIndex);
+        int getNumberOfDestinations(int startAirport);
 
         /** 
          * Returns the airport code map
@@ -117,34 +116,6 @@ class Graph {
          * @return the distance between two airports in kilometers
          */
         double euclideanDistance(Airport source, Airport destination);
-
-        /**
-         * A helper function for A-star algorithm
-         * 
-         * Computes the manhattan distance between two points.
-         * A manhattan distance is the number of steps it would take to travel between the two points
-         * using only up, down, left, and right movements (no diagonals)
-         *
-         * @param source - one vertex (Airport) the edge is connected to
-         * @param second - the other vertex (Airport) the edge is connected to
-         * 
-         * @return The manhattan distance between the two points
-         */
-        double manhattanDistance(Airport source, Airport destination);
-
-        /** 
-         * A helper function for A-star algorithm
-         * 
-         * Computes the chebyshev distance between two points
-         * The Chebyshev distance measures distance between two points as the 
-         * maximum difference over any of their axis values.
-         * 
-         * @param source - one vertex (Airport) the edge is connected to
-         * @param second - the other vertex (Airport) the edge is connected to
-         * 
-         * @return The chebyshev distance between the two points
-         */
-        double chebyshevDistance(Airport source, Airport destination);
 
         /** 
          * A helper function for djikstra's algorithm

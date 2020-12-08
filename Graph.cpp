@@ -9,15 +9,19 @@
 using namespace cs225;
 
 Graph::Graph() {
+    // 100 here is arbitrarily chosen
    adjMatrix.resize(100, std::vector<double>(100, 0));
-
 }
 
 Graph::Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, std::vector<std::string>> routeMap) {
 
+    // resize adjacency matrix to have a size equal to the number of airports 
     adjMatrix.resize(airportMap[0].size(), std::vector<double>(airportMap[0].size(), 0));
 
     for (size_t i = 0; i < airportMap[0].size(); i++) {
+
+        // create airport object with relevent data from the csv and insert into map; the various constants here
+        // refer to column numbers in the dataset
         Airport airportTemp(i + 1, airportMap[1][i], airportMap[2][i],
                             airportMap[4][i], airportMap[5][i], std::stod(airportMap[6][i]), 
                             std::stod(airportMap[7][i]));
@@ -25,6 +29,7 @@ Graph::Graph(std::map<int, std::vector<std::string>> airportMap, std::map<int, s
         airportCodeMap[airportMap[4][i]] = airportTemp;
     }
     
+    // add edges in our graph
     for (size_t i = 0; i < routeMap[0].size(); i++) {
         if (airportCodeMap.count(routeMap[2][i]) != 0 && airportCodeMap.count(routeMap[4][i]) != 0)
             addEdge(airportCodeMap[routeMap[2][i]], airportCodeMap[routeMap[4][i]]);
@@ -54,6 +59,7 @@ void Graph::displayMatrix(int v) {
 
 double Graph::euclideanDistance(Airport source, Airport destination) {
     // logic taken from https://www.geeksforgeeks.org/program-distance-two-points-earth/
+
     long double one_deg = (M_PI) / 180;
 
     double source_lat = one_deg * source.getLatitude();
@@ -119,16 +125,16 @@ int Graph::getNumVertices() {
     return adjMatrix[0].size(); 
 }
 
-int Graph::getIncidentEdges(int airportIndex) {
-    
+int Graph::getNumberOfDestinations(int startAirport) {
+    // To find the number of destinations reachable from startAirport,
+    // we count the number of non-zero entries in the row corresponding to
+    // startAiport in the adjacency matrix
     int dest = 0;
-    for (size_t i = 0; i < adjMatrix[airportIndex].size(); i++) {
-        if (adjMatrix[airportIndex][i] != 0) {
-        dest++;
-        }
+    for (size_t i = 0; i < adjMatrix[startAirport].size(); i++) {
+        if (adjMatrix[startAirport][i] != 0) 
+            dest++;
     }
     return dest;
-
 }
 
 std::map<std::string, Airport> Graph::getAirportCodeMap() {
@@ -138,38 +144,6 @@ std::map<std::string, Airport> Graph::getAirportCodeMap() {
 vector<vector<double>> Graph::getAdjacencyMatrix() {
     return adjMatrix;
 }
-
-double Graph::manhattanDistance(Airport source, Airport destination) {
-    long double one_deg = (M_PI) / 180;
-
-    double source_lat = one_deg * source.getLatitude();
-    double source_long = one_deg * source.getLongitude();
-    double dest_lat = one_deg * destination.getLatitude();
-    double dest_long = one_deg * destination.getLongitude();
-
-    // Haversine Formula
-    long double dlong = dest_long - source_long;
-    long double dlat = dest_lat - source_lat;
-
-    return abs(dlong) + abs(dlat);
-}
-
-
-double Graph::chebyshevDistance(Airport source, Airport destination) {
-    long double one_deg = (M_PI) / 180;
-
-    double source_lat = one_deg * source.getLatitude();
-    double source_long = one_deg * source.getLongitude();
-    double dest_lat = one_deg * destination.getLatitude();
-    double dest_long = one_deg * destination.getLongitude();
-
-    // Haversine Formula
-    long double dlong = dest_long - source_long;
-    long double dlat = dest_lat - source_lat;
-
-    return max(abs(dlong), abs(dlat));
-}
-
   
 int Graph::minDist(std::vector<int>& dist, std::vector<bool>  &reached) { 
     int min = INT_MAX; 
