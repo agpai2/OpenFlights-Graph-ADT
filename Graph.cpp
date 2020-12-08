@@ -6,6 +6,7 @@
 #include <queue>
 #include <limits.h> 
 
+
 using namespace cs225;
 
 Graph::Graph() {
@@ -84,7 +85,7 @@ double Graph::euclideanDistance(Airport source, Airport destination) {
 }
 
 void Graph::BFS(int start) {
-    if (getIncidentEdges(start) == 0) {
+    if (getNumberOfDestinations(start) == 0) {
         std::cout << "This airport has no destinations" << std::endl;
         return;
     }
@@ -239,7 +240,7 @@ std::vector<int> Graph::landmarkPath(std::string startNode, std::string intermed
 }
 
 void Graph::plotLandmarkPath(std::vector<string> path) {
-    PNG plottedMap;
+    cs225::PNG plottedMap;
     plottedMap.readFromFile("images/map.png");
 
     for(size_t i = 0; i < path.size(); i++) {
@@ -253,8 +254,8 @@ void Graph::plotLandmarkPath(std::vector<string> path) {
         double x = (temp_long/361) * plottedMap.width();  
 
         for (int i = -1; i < 1; i++) {
-            HSLAPixel &pixel = plottedMap.getPixel(x + i,y);
-            HSLAPixel airportPixel(28, 1, 0.5, 1);
+            cs225::HSLAPixel &pixel = plottedMap.getPixel(x + i,y);
+            cs225::HSLAPixel airportPixel(28, 1, 0.5, 1);
             pixel = airportPixel;
         }
     }
@@ -279,8 +280,8 @@ void Graph::plotAirports() {
         double x = (temp_long / 361) * plottedMap.width();
 
         for (int i = -1; i < 1; i++) {
-            HSLAPixel &pixel = plottedMap.getPixel(x, y + i);
-            HSLAPixel airportPixel(28, 1, 0.5, 1);
+            cs225::HSLAPixel &pixel = plottedMap.getPixel(x, y + i);
+            cs225::HSLAPixel airportPixel(28, 1, 0.5, 1);
             pixel = airportPixel;
         }
     }

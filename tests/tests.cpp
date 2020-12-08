@@ -4,6 +4,10 @@
 #include "../Graph.h"
 #include "../Airport.h"
 #include "../readFromFile.hpp"
+#include "../cs225/PNG.cpp"
+#include "../cs225/HSLAPixel.cpp"
+#include "../cs225/lodepng/lodepng.cpp"
+
 
 #include <sys/time.h>
 #include <vector>
@@ -12,6 +16,7 @@
 #include <map>
 #include <string>
 
+using namespace cs225;
 std::vector<std::vector<double>> adjMatrix;
 void createAdjacencyMatrix(int numberOfNodes) {
     for (int i = 0; i < numberOfNodes; i++) {
@@ -78,7 +83,7 @@ TEST_CASE("Number of incident edges - Small Data", "[weight=1]") {
 
   int source_idx = small_graph.getAirportCodeMap()[source].getId() - 1;
 
-  int dest = small_graph.getIncidentEdges(source_idx);
+  int dest = small_graph.getNumberOfDestinations(source_idx);
 
   // std::cout << "Sample IATA: " << sample_1[4][source_idx] << std::endl;
   // std::cout << "Destinations of PEN: " << edges << std::endl;
@@ -99,7 +104,7 @@ TEST_CASE("Number of incident edges - Big Data", "[weight=2]") {
 
   int source_idx = big_graph.getAirportCodeMap()[source_airport].getId() - 1;
 
-  int dest = big_graph.getIncidentEdges(source_idx);
+  int dest = big_graph.getNumberOfDestinations(source_idx);
 
   // std::cout << "Airport IATA: " << airports[4][source_idx] << std::endl;
   // std::cout << "Destinations of KZN: " << edges << std::endl;
