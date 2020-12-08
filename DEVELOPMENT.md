@@ -18,3 +18,19 @@
 
 3. Wrote a few test cases to test validity of our code and edited the makefile to compile
 the tests
+
+## Week 3: 
+1. Implemented Djiktra's algorithm
+
+2. Wrote the Landmark Path Algorithm
+
+3. NOTE (Change of Project Goals): Since we were enable to implement A*-search due to time constraints,
+    we switched our project goals to:
+
+    * Breadth First Traversal
+    * Djikstra's Algorithm
+    * Visualization of Graph on a world map
+
+3. Added functions to visualize the airports on a world map
+
+4. Wrote a few more test cases to test validity of our code 

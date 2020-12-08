@@ -17,12 +17,11 @@ We plan to implement the graph data structure to complete our project.
 
 We aim to accomplish the following in our project:
 
-- Traverse through the data set using the **BFS algorithm** and output this traversal.
+- Traverse through the data set using a **breadth-first** approach and output this traversal.
 
-- Using the distances between airports as weights, we will use the **landmark algorithm** to find the shortest path
-from one airport to another through layovers.
+- **Djikstra's Algorithm** to compute the shortest path between two nodes
 
-- Using the Euclidean distance between airports as a heuristic, we will implement the __A* algorithm__.
+- We will write code to display a **graphical output** of our graph on a world map.
 
 - We intend to follow the grey-box testing method to write test to verify the correctness of our code.
 
@@ -31,4 +30,6 @@ from one airport to another through layovers.
 due date, we will attempt to further implement one or more of the the following features:
 
 - A visualization of the graph using layered graph drawing (https://en.wikipedia.org/wiki/Layered_graph_drawing)
-- Graphical output of our graph on a world map.
+
+- Using the distances between airports as weights, we will use the **landmark algorithm** to find the shortest path
+from one airport to another via a stopover.
