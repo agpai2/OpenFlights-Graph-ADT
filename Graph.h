@@ -77,7 +77,7 @@ class Graph {
          *
          * @return the shortest path between vertices in a graph
          */
-        std::vector<int> djikstra(int src, int dest);
+        std::vector<int> dijkstra(int src, int dest);
 
         /** 
          * Finds the shortest path between two vertices in a graph through an 
@@ -131,6 +131,17 @@ class Graph {
          * not yet included in shortest path tree
          */
         int minDist(std::vector<int>& dist, std::vector<bool>  &reached);
+
+        /** 
+         * Computes the XY coordinates of an airport
+         * 
+         * @param lat - the latitude of the airport
+         * @param longt - the longitude of the airport
+         * @param image - the image onto which the airports are to be plotted upon
+         * 
+         * @return the XY coordinates of an airport
+         */
+        std::pair<double, double> getXYCoordinates(double lat, double longt, cs225::PNG image);
 
         vector<vector<double>> adjMatrix;
 

@@ -13,7 +13,7 @@ int main(int argc, const char * argv[]) {
 	std::map<int, std::vector<std::string>> routeMap = csv_reader(argv[2]);
 	Graph graph(airportMap, routeMap);
 
-	// graph.displayMatrix(30);
+	// graph.displayMatrix(15);
 	// graph.BFS(0);
 	std::vector<int> vec = graph.landmarkPath("GKA", "CNY", "KZN");
 

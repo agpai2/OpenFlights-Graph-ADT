@@ -17,22 +17,6 @@
 #include <string>
 
 using namespace cs225;
-std::vector<std::vector<double>> adjMatrix;
-void createAdjacencyMatrix(int numberOfNodes) {
-    for (int i = 0; i < numberOfNodes; i++) {
-        for (int j = 0; j < numberOfNodes; j++) {
-            struct timeval time;
-            gettimeofday(&time, NULL);
-            srand(time.tv_usec);
-            double randVal = (double) rand() / RAND_MAX;
-            if (randVal <= 4) {
-                adjMatrix[i][j] = 0;
-            } else {
-                adjMatrix[i][j] = (randVal - 4) * 100;
-            }
-        }
-    }
-}
 
 std::map<int, std::vector<std::string>> sample_1 = csv_reader("tests/sample1.csv");
 std::map<int, std::vector<std::string>> sample_2 = csv_reader("tests/sample2.csv");
@@ -146,6 +130,46 @@ TEST_CASE("Check if nodes are adjacent - Big Data", "[weight=2]") {
 
 TEST_CASE("Breadth First Traversal", "[weight=1]") {
 
+}
+
+TEST_CASE("Dijkstra's Algorithm - Small Data", "[weight=1]") {
+  std::map<std::string, Airport> airportMap = small_graph.getAirportCodeMap();
+
+  int source_id = airportMap["IDR"].getId() - 1;
+  int dest_id = airportMap["BRL"].getId() - 1;
+
+  std::vector<int> vec = small_graph.dijkstra(source_id, dest_id);
+
+  std::vector<std::string> path;
+  for (size_t i = 0; i < vec.size(); i++) {
+    path.push_back(sample_1[4][vec[i]]);
+	}
+
+  std::stringstream ss;
+  std::copy(path.begin(), path.end(),std::ostream_iterator<std::string>(ss, " "));
+
+  // Only prints the start airport and the intermediary airport to get to destination
+  REQUIRE(ss.str() == "IDR CNY ");
+}
+
+TEST_CASE("Dijkstra's Algorithm - Big Data", "[weight=1]") {
+  std::map<std::string, Airport> airportMap = big_graph.getAirportCodeMap();
+
+  int source_id = airportMap["CNY"].getId() - 1;
+  int dest_id = airportMap["KZN"].getId() - 1;
+
+  std::vector<int> vec = big_graph.dijkstra(source_id, dest_id);
+
+  std::vector<std::string> path;
+  for (size_t i = 0; i < vec.size(); i++) {
+    path.push_back(airports[4][vec[i]]);
+	}
+
+  std::stringstream ss;
+  std::copy(path.begin(), path.end(),std::ostream_iterator<std::string>(ss, " "));
+
+  // Only prints the start airport and the intermediary airport to get to destination
+  REQUIRE(ss.str() == "CNY SLC YYC YEG KEF HEL LED ");
 }
 
 TEST_CASE("Landmark Path - Small Data", "[weight=1]") {

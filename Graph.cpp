@@ -2,6 +2,7 @@
 #include <cmath>
 #include <map>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <queue>
 #include <limits.h> 
@@ -49,13 +50,16 @@ bool Graph::areAdjacent(Airport source, Airport destination) {
 }
 
 void Graph::displayMatrix(int v) {
-   int i, j;
-   for(i = 0; i < v; i++) {
-      for(j = 0; j < v; j++) {
-        std::cout << adjMatrix[i][j] << " ";
-      }
-      std::cout << std::endl;
-   }
+    for (int i = 0; i < v; i++) {
+        printf("[");
+        for (int j = 0; j < v; j++) {
+            std::cout << std::fixed << std::showpoint;
+            std::cout << std::setprecision(2);
+
+            std::cout << " " << adjMatrix[i][j] << " ";
+        }
+        printf("]\n");
+    }
 }
 
 double Graph::euclideanDistance(Airport source, Airport destination) {
@@ -159,7 +163,7 @@ int Graph::minDist(std::vector<int>& dist, std::vector<bool>  &reached) {
     return minIndex; 
 } 
 
-std::vector<int> Graph::djikstra(int src, int dest) {  
+std::vector<int> Graph::dijkstra(int src, int dest) {  
     const int numVertices = getNumVertices(); 
 
     std::vector<int> distVec(numVertices);
@@ -219,10 +223,10 @@ std::vector<int> Graph::landmarkPath(std::string startNode, std::string intermed
     std::vector<int> landmarkPathSoln;
 
     // get path from A to C and store it in a vector of ints
-    std::vector<int> pathFromAToC = djikstra(src, landmark);
+    std::vector<int> pathFromAToC = dijkstra(src, landmark);
 
     // get path from C to B and store it in a vector of ints
-    std::vector<int> pathFromCToB = djikstra(landmark, dest);
+    std::vector<int> pathFromCToB = dijkstra(landmark, dest);
 
     // combine the two vectors above and output that vector
     for (size_t i = 0; i < pathFromAToC.size(); i++) {
@@ -239,27 +243,78 @@ std::vector<int> Graph::landmarkPath(std::string startNode, std::string intermed
     return landmarkPathSoln;
 }
 
+std::pair<double, double> Graph::getXYCoordinates(double lat, double longt, cs225::PNG image) {
+    double temp_lat = lat >= 0 ? 90 - lat : 90 + abs(lat);
+    double temp_long = longt + 180;
+
+    double y = (temp_lat / 181) * image.height();
+    double x = (temp_long / 361) * image.width();
+
+    std::pair<double, double> coord(x, y);
+
+    return coord;
+}
+
 void Graph::plotLandmarkPath(std::vector<string> path) {
     cs225::PNG plottedMap;
     plottedMap.readFromFile("images/map.png");
 
+    // Plots the landmark points on the map
     for(size_t i = 0; i < path.size(); i++) {
         double lon = airportCodeMap[path[i]].getLongitude();
         double lat = airportCodeMap[path[i]].getLatitude();
-        
-        double temp_lat = lat >= 0 ? 90 - lat : 90 + abs(lat);
-        double temp_long = lon + 180;
 
-        double y = (temp_lat/181) * plottedMap.height();
-        double x = (temp_long/361) * plottedMap.width();  
+        std::pair<double, double> coord = getXYCoordinates(lat, lon, plottedMap);
 
-        for (int i = -1; i < 1; i++) {
-            cs225::HSLAPixel &pixel = plottedMap.getPixel(x + i,y);
+        for (int i = -1; i <= 1; i++) {
+            cs225::HSLAPixel &pixel_x = plottedMap.getPixel(coord.first + i, coord.second);
+            cs225::HSLAPixel &pixel_y = plottedMap.getPixel(coord.first, coord.second + i);
+
             cs225::HSLAPixel airportPixel(28, 1, 0.5, 1);
-            pixel = airportPixel;
+
+            pixel_x = airportPixel;
+            pixel_y = airportPixel;
         }
     }
-            
+
+    for (size_t i = 0; i < path.size() - 1; i++) {
+        double lon1 = airportCodeMap[path[i]].getLongitude();
+        double lat1 = airportCodeMap[path[i]].getLatitude();
+
+        std::pair<double, double> coord1 = getXYCoordinates(lat1, lon1, plottedMap);
+
+        double lon2 = airportCodeMap[path[i + 1]].getLongitude();
+        double lat2 = airportCodeMap[path[i + 1]].getLatitude();
+
+        std::pair<double, double> coord2 = getXYCoordinates(lat2, lon2, plottedMap);
+
+        for (int i = coord1.first; i < coord2.first; i++) {
+            double y_val = (((coord2.second - coord1.second) / (coord2.first - coord1.first)) * 
+                    abs((i - coord1.first))) + coord1.second;
+
+            unsigned int y_entry = abs(round(y_val));
+            unsigned int x_entry = i;
+            if (abs(i) < plottedMap.width() && abs(round(y_val)) < plottedMap.height()) {
+                cs225::HSLAPixel &pixel = plottedMap.getPixel(x_entry, y_entry);
+                cs225::HSLAPixel pathPixel(300, 1, 0.5, 1);
+                pixel = pathPixel;
+            }
+        }
+
+        for (int i = coord2.first; i < coord1.first; i++) {
+            double y_val = (((coord1.second - coord2.second) / (coord1.first - coord2.first)) * 
+                    abs((i - coord2.first))) + coord2.second;
+
+            unsigned int y_entry = abs(round(y_val));
+            unsigned int x_entry = i;
+            if (abs(i) < plottedMap.width() && abs(round(y_val)) < plottedMap.height()) {
+                cs225::HSLAPixel &pixel = plottedMap.getPixel(x_entry, y_entry);
+                cs225::HSLAPixel pathPixel(300, 1, 0.5, 1);
+                pixel = pathPixel;
+            }
+        }
+    }
+    
     plottedMap.writeToFile("images/landmark_path.png");
 }
 
@@ -279,11 +334,10 @@ void Graph::plotAirports() {
         double y = (temp_lat / 181) * plottedMap.height();
         double x = (temp_long / 361) * plottedMap.width();
 
-        for (int i = -1; i < 1; i++) {
-            cs225::HSLAPixel &pixel = plottedMap.getPixel(x, y + i);
-            cs225::HSLAPixel airportPixel(28, 1, 0.5, 1);
-            pixel = airportPixel;
-        }
+        cs225::HSLAPixel &pixel = plottedMap.getPixel(x, y);
+        cs225::HSLAPixel airportPixel(28, 1, 0.5, 1);
+
+        pixel = airportPixel;
     }
 
     plottedMap.writeToFile("images/airports.png");
