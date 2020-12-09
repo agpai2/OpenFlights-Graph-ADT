@@ -3,6 +3,8 @@
 #include "Airport.h"
 #include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
+
+#include <vector>
 #include <map>
 
 class Graph {
@@ -143,7 +145,7 @@ class Graph {
          */
         std::pair<double, double> getXYCoordinates(double lat, double longt, cs225::PNG image);
 
-        vector<vector<double>> adjMatrix;
+        std::vector<std::vector<double>> adjMatrix;
 
         std::map<std::string, Airport> airportCodeMap;
 };

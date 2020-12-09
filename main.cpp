@@ -6,7 +6,7 @@
 
 #include "Graph.h"
 #include "Airport.h"
-#include "readFromFile.hpp"
+#include "util/readFromFile.hpp"
 
 int main(int argc, const char * argv[]) {
 	std::map<int, std::vector<std::string>> airportMap = csv_reader(argv[1]);

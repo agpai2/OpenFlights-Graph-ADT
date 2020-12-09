@@ -3,7 +3,7 @@
 
 #include "../Graph.h"
 #include "../Airport.h"
-#include "../readFromFile.hpp"
+#include "../util/readFromFile.hpp"
 #include "../cs225/PNG.cpp"
 #include "../cs225/HSLAPixel.cpp"
 #include "../cs225/lodepng/lodepng.cpp"

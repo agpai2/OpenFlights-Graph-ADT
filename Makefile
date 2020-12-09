@@ -35,8 +35,8 @@ $(EXENAME): output_msg $(OBJS)
 main.o : main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp 
 
-readFromFile.o: readFromFile.cpp readFromFile.hpp
-	$(CXX) $(CXXFLAGS) readFromFile.cpp
+readFromFile.o: util/readFromFile.cpp util/readFromFile.hpp
+	$(CXX) $(CXXFLAGS) util/readFromFile.cpp
 	
 Graph.o: Graph.cpp Graph.h
 	$(CXX) $(CXXFLAGS) Graph.cpp
@@ -47,7 +47,7 @@ Airport.o: Airport.cpp Airport.h
 test: output_msg tests.o readFromFile.o Graph.o Airport.o
 	$(LD) tests.o readFromFile.o Graph.o Airport.o $(LDFLAGS) -o test
 
-tests.o: tests/tests.cpp catch/catch.hpp Graph.h Airport.h readFromFile.hpp
+tests.o: tests/tests.cpp catch/catch.hpp Graph.h Airport.h util/readFromFile.hpp
 	$(CXX) $(CXXFLAGS) tests/tests.cpp
 
 
