@@ -59,7 +59,8 @@ class Graph {
         /** 
          * Displays the elements of the adjacency matrix
          * 
-         * @param v - the number of columns/rows to display. For instance, if v = 5, it will print a 5*5 square matrix starting
+         * @param v - the number of columns/rows to display. For instance, if v = 5, 
+         * it will print a 5*5 square matrix starting
          * from the top left of the adjacency matrix
          */
         void displayMatrix(int v);

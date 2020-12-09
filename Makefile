@@ -1,5 +1,5 @@
 EXENAME = main
-OBJS = readFromFile.o main.o Graph.o Airport.o 
+OBJS = readFromFile.o main.o Graph.o Airport.o menu.o
 
 # Use the cs225 makefile template:
 include cs225/make/cs225.mk
@@ -37,6 +37,9 @@ main.o : main.cpp
 
 readFromFile.o: util/readFromFile.cpp util/readFromFile.hpp
 	$(CXX) $(CXXFLAGS) util/readFromFile.cpp
+
+menu.o: util/menu.cpp util/menu.hpp
+	$(CXX) $(CXXFLAGS) util/menu.cpp
 	
 Graph.o: Graph.cpp Graph.h
 	$(CXX) $(CXXFLAGS) Graph.cpp

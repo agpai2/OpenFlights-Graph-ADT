@@ -52,7 +52,7 @@ bool Graph::areAdjacent(Airport source, Airport destination) {
 void Graph::displayMatrix(int v) {
 
     // v = -1 indicates that we want the whole matrix to be printed (by choice)
-    if (v == -1) {
+    if (v <= -1 || v >= adjMatrix[0].size()) {
         v = adjMatrix[0].size();
     }
 
@@ -326,6 +326,8 @@ void Graph::plotLandmarkPath(std::vector<string> path) {
     }
     
     plottedMap.writeToFile("images/landmark_path.png");
+
+    std::cout << "The required image is stored in images/landmark_path.png" << std::endl;
 }
 
 void Graph::plotAirports() {
@@ -351,4 +353,6 @@ void Graph::plotAirports() {
     }
 
     plottedMap.writeToFile("images/airports.png");
+
+    std::cout << "The required image is stored in images/airports.png" << std::endl;
 }

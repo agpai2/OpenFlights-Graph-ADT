@@ -7,6 +7,7 @@
 #include "Graph.h"
 #include "Airport.h"
 #include "util/readFromFile.hpp"
+#include "util/menu.hpp"
 
 int main(int argc, const char * argv[]) {
 
@@ -16,18 +17,5 @@ int main(int argc, const char * argv[]) {
 
 	Graph graph(airportMap, routeMap);
 
-	std::vector<int> vec = graph.landmarkPath("GKA", "CNY", "KZN");
-
-	std::vector<std::string> path;
-	for (size_t i = 0; i < vec.size(); i++) {
-		path.push_back(airportMap[4][vec[i]]);
-	}
-
-	graph.plotLandmarkPath(path);
-	graph.plotAirports();
-
-	// std::stringstream ss;
-  // std::copy(path.begin(), path.end(),std::ostream_iterator<std::string>(ss, " "));
-
-	// std::cout << ss.str() << std::endl;
+	initMenu(graph, airportMap);
 }

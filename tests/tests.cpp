@@ -148,8 +148,8 @@ TEST_CASE("Dijkstra's Algorithm - Small Data", "[weight=1]") {
 TEST_CASE("Dijkstra's Algorithm - Big Data", "[weight=1]") {
   std::map<std::string, Airport> airportMap = big_graph.getAirportCodeMap();
 
-  int source_id = airportMap["CNY"].getId() - 1;
-  int dest_id = airportMap["KZN"].getId() - 1;
+  // int source_id = airportMap["CNY"].getId() - 1;
+  // int dest_id = airportMap["KZN"].getId() - 1;
 
   std::vector<int> vec = big_graph.dijkstra("CNY", "KZN");
 
