@@ -35,12 +35,3 @@ double Airport::getLatitude() {
 double Airport::getLongitude() {
   return longitude_; 
 }
-
-
-string Airport::getName() {
-  return name_;
-}
-
-string Airport::getIATA() {
-  return iataCode_;
-}

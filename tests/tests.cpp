@@ -128,17 +128,10 @@ TEST_CASE("Check if nodes are adjacent - Big Data", "[weight=2]") {
   REQUIRE(big_graph.areAdjacent(s, d));
 }
 
-TEST_CASE("Breadth First Traversal", "[weight=1]") {
-
-}
-
 TEST_CASE("Dijkstra's Algorithm - Small Data", "[weight=1]") {
   std::map<std::string, Airport> airportMap = small_graph.getAirportCodeMap();
 
-  int source_id = airportMap["IDR"].getId() - 1;
-  int dest_id = airportMap["BRL"].getId() - 1;
-
-  std::vector<int> vec = small_graph.dijkstra(source_id, dest_id);
+  std::vector<int> vec = small_graph.dijkstra("IDR", "BRL");
 
   std::vector<std::string> path;
   for (size_t i = 0; i < vec.size(); i++) {
@@ -158,7 +151,7 @@ TEST_CASE("Dijkstra's Algorithm - Big Data", "[weight=1]") {
   int source_id = airportMap["CNY"].getId() - 1;
   int dest_id = airportMap["KZN"].getId() - 1;
 
-  std::vector<int> vec = big_graph.dijkstra(source_id, dest_id);
+  std::vector<int> vec = big_graph.dijkstra("CNY", "KZN");
 
   std::vector<std::string> path;
   for (size_t i = 0; i < vec.size(); i++) {

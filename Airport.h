@@ -25,11 +25,7 @@ class Airport {
     
     // Gets the longitude
     double getLongitude();
-
-    string getName();
-
-    string getIATA();
-
+    
   private:
     // Unique OpenFlights identifier for this airport
     int id_;

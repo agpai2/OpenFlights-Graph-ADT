@@ -50,6 +50,12 @@ bool Graph::areAdjacent(Airport source, Airport destination) {
 }
 
 void Graph::displayMatrix(int v) {
+
+    // v = -1 indicates that we want the whole matrix to be printed (by choice)
+    if (v == -1) {
+        v = adjMatrix[0].size();
+    }
+
     for (int i = 0; i < v; i++) {
         printf("[");
         for (int j = 0; j < v; j++) {
@@ -88,7 +94,10 @@ double Graph::euclideanDistance(Airport source, Airport destination) {
     return distance;
 }
 
-void Graph::BFS(int start) {
+void Graph::BFS(std::string startNode) {
+
+    int start = airportCodeMap[startNode].getId() - 1;
+
     if (getNumberOfDestinations(start) == 0) {
         std::cout << "This airport has no destinations" << std::endl;
         return;
@@ -163,7 +172,11 @@ int Graph::minDist(std::vector<int>& dist, std::vector<bool>  &reached) {
     return minIndex; 
 } 
 
-std::vector<int> Graph::dijkstra(int src, int dest) {  
+std::vector<int> Graph::dijkstra(std::string startNode, std::string endNode) {  
+
+    int src = airportCodeMap[startNode].getId() - 1;
+    int dest = airportCodeMap[endNode].getId() - 1;
+
     const int numVertices = getNumVertices(); 
 
     std::vector<int> distVec(numVertices);
@@ -216,17 +229,14 @@ std::vector<int> Graph::dijkstra(int src, int dest) {
 
 std::vector<int> Graph::landmarkPath(std::string startNode, std::string intermediateNode, std::string endNode) {
 
-    int src = airportCodeMap[startNode].getId() - 1;
-    int landmark = airportCodeMap[intermediateNode].getId() - 1;
     int dest = airportCodeMap[endNode].getId() - 1;
-
     std::vector<int> landmarkPathSoln;
 
     // get path from A to C and store it in a vector of ints
-    std::vector<int> pathFromAToC = dijkstra(src, landmark);
+    std::vector<int> pathFromAToC = dijkstra(startNode, intermediateNode);
 
     // get path from C to B and store it in a vector of ints
-    std::vector<int> pathFromCToB = dijkstra(landmark, dest);
+    std::vector<int> pathFromCToB = dijkstra(intermediateNode, endNode);
 
     // combine the two vectors above and output that vector
     for (size_t i = 0; i < pathFromAToC.size(); i++) {
