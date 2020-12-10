@@ -21,15 +21,15 @@ We aim to accomplish the following in our project:
 
 - **Djikstra's Algorithm** to compute the shortest path between two nodes
 
+- Using the distances between airports as weights, we will use the **landmark algorithm** to find the shortest path
+from one airport to another via a stopover. We will also output this path on a world map.
+
 - We will write code to display a **graphical output** of our graph on a world map.
 
 - We intend to follow the grey-box testing method to write test to verify the correctness of our code.
 
 ## Extensions, Extras, and More
  If we manage to complete the tasks mentioned above well before the
-due date, we will attempt to further implement one or more of the the following features:
+due date, we will attempt to further implement the following feature:
 
 - A visualization of the graph using layered graph drawing (https://en.wikipedia.org/wiki/Layered_graph_drawing)
-
-- Using the distances between airports as weights, we will use the **landmark algorithm** to find the shortest path
-from one airport to another via a stopover.
