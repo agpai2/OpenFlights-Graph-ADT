@@ -221,7 +221,7 @@ std::vector<int> Graph::dijkstra(std::string startNode, std::string endNode) {
         }
         std::reverse(requiredPath.begin(), requiredPath.end());
     } else {
-        std::cout << "Path doesn't exist" << std::endl;
+        std::cout << "Path doesn't exist " << std::endl;
     }
 
     return requiredPath;

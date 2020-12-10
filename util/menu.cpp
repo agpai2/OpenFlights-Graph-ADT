@@ -76,14 +76,20 @@ void displayMenu() {
 
 		std::cout << "Enter your choice" << std::endl;
 		int option;
-		std::cin >> option;
+    char* str;
+		std::cin >> str;
+    option = atof(str);
 
 		switch(option) {
+      case 0: {
+        std::cout << "\n";
+				std::cout << "Invalid Option. Please enter valid option number" << std::endl;
+        break;
+      }
 			case 1: {
         displayAdjacencyMatrix();
         break;
       }
-
 			case 2: {
 				displayBFSTraversal();
 				break;
@@ -106,9 +112,8 @@ void displayMenu() {
 				exit(0);
       }
 
-			default: {
-				std::cout << "Invalid Option" << std::endl;
-				break;
+			default: { 
+				exit(0);
 			}
 		}
 	}
