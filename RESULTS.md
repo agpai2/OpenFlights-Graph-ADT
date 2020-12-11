@@ -21,11 +21,11 @@ We have also tested our code using the Catch testing framework.
 
 To run the code, the user has to use the 'make' command, followed by './main datafile1.csv datafile2.csv'. This compiles the code and builds the graph. Once this is done, the program immediately displays a menu that allows the user to choose which algorithm they want to run. The user is then further prompted to enter their choice, and then asked for the inputs corresponding to their choice. For instance, if the user chooses Djikstra's algorithm, they will then be asked to provide the 3-letter IATA codes for the start and end airports.
 
-![Menu: How to run Djikstra's Algorithm](images/djikstraMenu.png)
+![Menu: How to run Djikstra's Algorithm](images/djikstraMenu.PNG)
 
 In the case of the Landmark path algorithm, the code generates, in addition to the console output, an image of the world map in which the computed path has been plotted.
 
-![Landmark Path Console Output](images/landmarkOutputMenu.png) ![Landmark Path on World Map](images/landmark_path.png)
+![Landmark Path Console Output](images/landmarkOutputMenu.PNG) ![Landmark Path on World Map](images/landmark_path.png)
 
 Here are also some of the console outputs of our other algorithms. (In the case of the breadth-first traversal and adjacency matrix display functionality, the output is rather large and therefore, we have not included an image here.)
 
