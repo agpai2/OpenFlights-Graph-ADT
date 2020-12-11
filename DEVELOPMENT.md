@@ -19,7 +19,7 @@
 3. Wrote a few test cases to test validity of our code and edited the makefile to compile
 the tests
 
-## Week 3: 
+## Week 3 and beyond: 
 1. Implemented Djiktra's algorithm
 
 2. Wrote the Landmark Path Algorithm
@@ -33,6 +33,8 @@ the tests
 
     A more detailed description of the goals has also been added to the GOALS.md document.
 
-3. Added functions to visualize the airports on a world map
+3. Added functions to visualize the airports as well as landmark path on a world map
 
 4. Wrote a few more test cases to test validity of our code 
+
+5. Worked on documentation, output, and minor bug fixes
