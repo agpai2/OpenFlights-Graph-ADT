@@ -14,7 +14,7 @@ The final presentation for this project can be accessed [here](https://youtu.be/
 
 ## Dataset
 
-**The datasets to use for this project are ![airports.csv](data/airports.csv) and ![routes.csv](data/routes.csv)**. 
+**The datasets to use for this project are [airports.csv](data/airports.csv) and [routes.csv](data/routes.csv)**. 
 
 NOTE: This data was obtained from the [OpenFlights](https://openflights.org/data.html) dataset, and headers were added to the data from the website to create our airports.csv and routes.csv data files. This is an open source data set of flights routes and airports. The OpenFlights Airports Database contains several thousand airports spanning the globe. We used this data to obtain the airports and routes in order to create and define a Graph ADT using an adjacency matrix.
 
