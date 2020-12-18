@@ -52,7 +52,7 @@ bool Graph::areAdjacent(Airport source, Airport destination) {
 void Graph::displayMatrix(int v) {
 
     // v = -1 indicates that we want the whole matrix to be printed (by choice)
-    if (v <= -1 || v >= adjMatrix[0].size()) {
+    if (v <= -1 || v >= (int) adjMatrix[0].size()) {
         v = adjMatrix[0].size();
     }
 
@@ -304,7 +304,7 @@ void Graph::plotLandmarkPath(std::vector<string> path) {
 
             unsigned int y_entry = abs(round(y_val));
             unsigned int x_entry = i;
-            if (abs(i) < plottedMap.width() && abs(round(y_val)) < plottedMap.height()) {
+            if (abs(i) < (int) plottedMap.width() && abs(round(y_val)) < plottedMap.height()) {
                 cs225::HSLAPixel &pixel = plottedMap.getPixel(x_entry, y_entry);
                 cs225::HSLAPixel pathPixel(300, 1, 0.5, 1);
                 pixel = pathPixel;
@@ -317,7 +317,7 @@ void Graph::plotLandmarkPath(std::vector<string> path) {
 
             unsigned int y_entry = abs(round(y_val));
             unsigned int x_entry = i;
-            if (abs(i) < plottedMap.width() && abs(round(y_val)) < plottedMap.height()) {
+            if (abs(i) < (int) plottedMap.width() && abs(round(y_val)) < plottedMap.height()) {
                 cs225::HSLAPixel &pixel = plottedMap.getPixel(x_entry, y_entry);
                 cs225::HSLAPixel pathPixel(300, 1, 0.5, 1);
                 pixel = pathPixel;
